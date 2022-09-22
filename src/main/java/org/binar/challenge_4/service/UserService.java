@@ -4,12 +4,13 @@ import org.binar.challenge_4.entities.Users;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserService {
 
+    List<Users> getAllUsers();
     ResponseEntity<Users> addUser(Users user);
-    ResponseEntity<Users> updateUser(Users user, String name);
-
-
+    Users updateUser(Users newUser, String name);
 
 }
