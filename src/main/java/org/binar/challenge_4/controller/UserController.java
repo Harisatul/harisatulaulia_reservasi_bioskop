@@ -2,8 +2,11 @@ package org.binar.challenge_4.controller;
 
 import org.binar.challenge_4.entities.Users;
 import org.binar.challenge_4.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("cinema/api/v1/users")
@@ -15,17 +18,23 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping
+    public ResponseEntity<List<Users>> getAllUser(){
+        List<Users> allUsers = userService.getAllUsers();
+        return new ResponseEntity<>(allUsers, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Users> addUser(@RequestBody Users user){
         ResponseEntity<Users> userResponseEntity = userService.addUser(user);
-        System.out.println("good");
         return userResponseEntity;
     }
 
-    @PutMapping("/{username}")
+    @PutMapping("{username}")
     public ResponseEntity<Users> updateUser(@RequestBody Users user, @PathVariable(value = "username") String username){
-        ResponseEntity<Users> userResponseEntity = userService.updateUser(user, username);
-        System.out.println("good2");
-        return userResponseEntity;
+        Users users = userService.updateUser(user, username);
+        return new ResponseEntity<>(users, HttpStatus.CREATED);
     }
+
+
 }
