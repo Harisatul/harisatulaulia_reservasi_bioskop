@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,9 +23,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<Users> updateUser(Users user, String username) {
+    public Users updateUser(Users newUser, String username) {
         Users users = userRepository.findUsersByUsername(username).orElseThrow();
-        System.out.println(users);
-        return new ResponseEntity<>(users, HttpStatus.OK);
+        if (users != null){
+            users.setUsername(newUser.getUsername());
+            users.setEmail(newUser.getEmail());
+            users.setPassword(newUser.getPassword());
+            userRepository.save(users);
+        }
+        return users;
     }
 }
