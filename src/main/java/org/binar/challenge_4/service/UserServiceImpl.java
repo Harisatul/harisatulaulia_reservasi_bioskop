@@ -1,13 +1,13 @@
 package org.binar.challenge_4.service;
 
 import org.binar.challenge_4.entities.Users;
+import org.binar.challenge_4.payload.ApiResponse;
 import org.binar.challenge_4.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -39,5 +39,12 @@ public class UserServiceImpl implements UserService {
             userRepository.save(users);
         }
         return users;
+    }
+
+    @Override
+    public ApiResponse deleteUsers(String username) {
+        Users users = userRepository.findUsersByUsername(username).orElseThrow();
+        userRepository.delete(users);
+        return new ApiResponse(true, "Successfully delete profile " + username);
     }
 }
