@@ -1,8 +1,9 @@
-package org.binar.challenge_4.service;
+package org.binar.challenge_4.service.impl;
 
 import org.binar.challenge_4.entities.Movie;
 import org.binar.challenge_4.payload.ApiResponse;
 import org.binar.challenge_4.repository.MovieRepository;
+import org.binar.challenge_4.service.MovieService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,8 +1,9 @@
-package org.binar.challenge_4.service;
+package org.binar.challenge_4.service.impl;
 
 import org.binar.challenge_4.entities.Users;
 import org.binar.challenge_4.payload.ApiResponse;
 import org.binar.challenge_4.repository.UserRepository;
+import org.binar.challenge_4.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
