@@ -34,4 +34,10 @@ public class MovieContoller {
         ApiResponse apiResponse = movieService.updateMovie(id);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<ApiResponse> deleteMovie(@PathVariable(value = "id") Long id){
+        ApiResponse apiResponse = movieService.deleteMovie(id);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
 }

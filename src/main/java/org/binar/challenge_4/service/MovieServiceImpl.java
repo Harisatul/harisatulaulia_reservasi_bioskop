@@ -33,4 +33,11 @@ public class MovieServiceImpl implements MovieService {
         Movie movie = movieRepository.findById(id).orElseThrow();
         return new ApiResponse(Boolean.TRUE, "successfully update", movie);
     }
+
+    @Override
+    public ApiResponse deleteMovie(Long id) {
+        Movie movie = movieRepository.findById(id).orElseThrow();
+        movieRepository.delete(movie);
+        return new ApiResponse(Boolean.TRUE, "successfully deleted movie with id " + id);
+    }
 }
