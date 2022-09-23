@@ -17,5 +17,9 @@ public class Movie extends BaseEntity{
     private Boolean isPremiered;
 
     @ManyToMany(mappedBy = "movies_genre")
-    private Set<Genre> genre =  new HashSet<>();
+    private Set<Genre> movies ;
+
+    @ManyToMany(mappedBy = "movies")
+    private Set<Schedule> schedules;
+
 }
