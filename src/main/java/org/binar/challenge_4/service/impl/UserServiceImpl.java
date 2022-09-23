@@ -4,6 +4,7 @@ import org.binar.challenge_4.entities.Users;
 import org.binar.challenge_4.payload.ApiResponse;
 import org.binar.challenge_4.repository.UserRepository;
 import org.binar.challenge_4.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
 
+    @Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }

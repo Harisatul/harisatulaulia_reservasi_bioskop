@@ -4,12 +4,16 @@ package org.binar.challenge_4.entities;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.Set;
 
 @Data
 @Entity
 public class Seat extends BaseEntity{
 
-    private Integer seat_id;
-    private Integer seat_number;
+    private Long seat_number;
+
+    @OneToMany(mappedBy = "seat")
+    Set<SeatAvailable> seatAvailables;
 
 }

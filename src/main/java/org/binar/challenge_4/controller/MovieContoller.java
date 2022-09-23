@@ -1,20 +1,19 @@
 package org.binar.challenge_4.controller;
 
 import org.binar.challenge_4.entities.Movie;
+import org.binar.challenge_4.entities.Schedule;
 import org.binar.challenge_4.payload.ApiResponse;
+import org.binar.challenge_4.repository.MovieRepository;
 import org.binar.challenge_4.service.MovieService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("cinema/api/v1/movies")
 public class MovieContoller {
 
-    private final MovieService movieService;
-
+    private  MovieService movieService;
     public MovieContoller(MovieService movieService) {
         this.movieService = movieService;
     }

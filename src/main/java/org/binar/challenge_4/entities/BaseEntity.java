@@ -21,7 +21,7 @@ public class BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long Id;
+    protected Long id;
 
     @CreatedDate
     @Column(name = "created_at")
@@ -46,8 +46,5 @@ public class BaseEntity implements Serializable {
     protected void preRemove() {
         this.updatedAt = LocalDateTime.now();
     }
-
-
-
 
 }

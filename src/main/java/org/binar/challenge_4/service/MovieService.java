@@ -10,4 +10,5 @@ public interface MovieService {
     ApiResponse updateMovie(Long id);
     ApiResponse deleteMovie(Long id);
 
+
 }
