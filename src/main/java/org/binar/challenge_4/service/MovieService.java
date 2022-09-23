@@ -8,5 +8,6 @@ public interface MovieService {
     ApiResponse getAllMovie();
     ApiResponse addMovie(Movie movie);
     ApiResponse updateMovie(Long id);
+    ApiResponse deleteMovie(Long id);
 
 }
