@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Waves_Landscape" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0" uuid="e115bc59-fd0f-446b-a585-04725e27d7f0">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#FFFFFF" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="movieTittle" class="java.lang.String"/>
+	<parameter name="id" class="java.lang.String"/>
+	<parameter name="movieStart" class="java.lang.String"/>
+	<parameter name="movieEnd" class="java.lang.String"/>
+	<parameter name="seat" class="java.lang.String"/>
+	<parameter name="studioCode" class="java.lang.String"/>
+	<parameter name="userId" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM orders]]>
+	</queryString>
+	<title>
+		<band height="119" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="0" width="802" height="67" uuid="1dcadd54-7d50-4470-85ed-189e4d910b25"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="54" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Cinema Invoice]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="232" y="67" width="568" height="37" uuid="862cb50c-5a5e-4906-a495-226e25115fb6"/>
+				<textElement textAlignment="Right">
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[XXV Cinema]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="96" y="80" width="54" height="20" uuid="15f6c11a-7f72-4394-8626-d1890930f358"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Studio : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="150" y="80" width="90" height="20" uuid="00cbab3a-09d7-41a7-a82f-843a3d35660c"/>
+				<textFieldExpression><![CDATA[$P{studioCode}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="97" y="5" width="705" height="20" backcolor="#666666" uuid="35d90a9b-bb7e-4ec4-bfa2-68be1967d6b2"/>
+				<staticText>
+					<reportElement style="Column header" x="0" y="0" width="50" height="15" uuid="253e957d-72f4-45c8-87b7-af2899f25c65">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6c7e4946-4ebf-4948-bc3f-dcb79fadc8ea"/>
+					</reportElement>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[id]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="50" y="0" width="70" height="15" uuid="8a786a1b-dd75-4140-9d73-e46133866e0a">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a201651e-f7fc-491c-83f1-b043acbb6ca6"/>
+					</reportElement>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[user_id]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="120" y="1" width="120" height="15" uuid="ac9c1fc4-67b6-47fc-b099-1e9be43e4291">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="361623ef-736e-4927-9fb4-433d5633f387"/>
+					</reportElement>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[movie start]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="630" y="0" width="74" height="15" uuid="62869a1d-a722-451c-b0c3-3a02e7022e0c">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="71fcdb6a-b513-4e16-98e0-af5cd91ead14"/>
+					</reportElement>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[seat]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="240" y="1" width="120" height="15" uuid="d93dc1c7-a46a-488f-8e3e-6daded619633">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="361623ef-736e-4927-9fb4-433d5633f387"/>
+					</reportElement>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[movie end]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="360" y="0" width="260" height="15" uuid="a09d3578-cc0a-4958-a763-e29ceb5d00c6">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="71fcdb6a-b513-4e16-98e0-af5cd91ead14"/>
+					</reportElement>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[movie]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="37" splitType="Stretch">
+			<frame>
+				<reportElement x="97" y="1" width="705" height="15" uuid="89a3da05-fdde-4ffe-965f-cc476f72e3ab"/>
+				<textField>
+					<reportElement x="462" y="0" width="70" height="14" uuid="344ec577-29e5-4200-b41e-6fa3541ab4a8"/>
+					<textFieldExpression><![CDATA[$P{movieTittle}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="2" y="0" width="38" height="14" uuid="ee892db4-5238-4f57-8272-78036979ff17"/>
+					<textFieldExpression><![CDATA[$P{id}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="140" y="-1" width="100" height="16" uuid="ce907e1a-544a-46ca-873b-377df36da1af"/>
+					<textFieldExpression><![CDATA[$P{movieStart}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="270" y="-1" width="80" height="16" uuid="ab08f77b-88e7-4e9f-80c6-253efd65de17"/>
+					<textFieldExpression><![CDATA[$P{movieEnd}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="637" y="-1" width="68" height="16" uuid="5ce75022-d5aa-4825-9332-9703d2ed7126"/>
+					<textFieldExpression><![CDATA[$P{seat}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="60" y="-1" width="60" height="16" uuid="16d3298c-e7c6-46b6-b9c3-4968c0d5479e"/>
+					<textFieldExpression><![CDATA[$P{userId}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="97" y="16" width="705" height="1" uuid="e5f21b91-7f24-498e-97a1-0e93db9225a4"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="39" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="671" y="0" width="131" height="20" forecolor="#000000" uuid="95484ca0-40b4-4752-95d8-1afbc33c820b"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="96" y="0" width="177" height="20" uuid="0ec52099-dcd7-42f4-8baa-f3874f05208a"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[this generate automatically]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
