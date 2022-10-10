@@ -5,7 +5,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,7 +22,7 @@ public class Movie extends BaseEntity{
     private Set<Genre> movies ;
 
     @JsonIgnore
-    @OneToMany
+    @OneToMany(mappedBy = "movies")
     private List<Schedule> schedules = new ArrayList<>();
 
 }

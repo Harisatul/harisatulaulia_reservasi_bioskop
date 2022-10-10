@@ -1,18 +1,27 @@
 package org.binar.challenge_4.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 
 @Data
 @Entity
 public class Studio extends BaseEntity{
 
+    @OneToMany(mappedBy = "studios")
+    @JsonIgnore
+    private List<Seat> seats = new LinkedList<>();
+
     private String studioCode;
 
     @OneToMany(mappedBy = "studio")
-    Set<SeatAvailable> seatAvailables;
+    @JsonIgnore
+    private List<Schedule> schedules = new LinkedList<>();
+
+
 
 }

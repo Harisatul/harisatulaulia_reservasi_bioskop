@@ -2,13 +2,13 @@ package org.binar.challenge_4.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
+
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 
 @Data
@@ -32,7 +32,19 @@ public class Schedule extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
+    @JsonIgnore
     private Movie movies ;
+
+    @ManyToOne
+    @JoinColumn(name = "studio_id")
+    @JsonIgnore
+    private Studio studio ;
+
+    @OneToMany(mappedBy = "schedule")
+    @JsonIgnore
+    private List<Order> order;
+
+
 
 
 
