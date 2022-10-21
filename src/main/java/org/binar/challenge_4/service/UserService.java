@@ -11,6 +11,7 @@ public interface UserService {
     List<Users> getAllUsers();
     ResponseEntity<Users> addUser(Users user);
     Users updateUser(Users newUser, String name);
+    Users getUserByUsername(String username);
     ApiResponse deleteUsers(String username);
 
 }
