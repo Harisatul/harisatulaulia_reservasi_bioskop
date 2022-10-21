@@ -78,7 +78,7 @@ public class UserController {
         return new ResponseEntity<>(userByUsername,OK);
     }
 
-    @PostMapping
+    @PostMapping("/signup")
     @Operation(
             tags = {"User"},
             operationId = "addUser",
@@ -176,7 +176,6 @@ public class UserController {
             }
 
     )
-
     public ResponseEntity<ApiResponse> deleteUser(@PathVariable(value = "username") String username){
         ApiResponse apiResponse = userService.deleteUsers(username);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
