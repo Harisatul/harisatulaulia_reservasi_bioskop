@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,4 +23,13 @@ public class Users extends BaseEntity {
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Order> orderSet = new LinkedList<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id")
+    )
+    @JsonIgnore
+    private List<Role> roles = new LinkedList<>();
 }
