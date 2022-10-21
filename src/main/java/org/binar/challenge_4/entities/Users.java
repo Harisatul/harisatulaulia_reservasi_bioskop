@@ -1,7 +1,9 @@
 package org.binar.challenge_4.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,11 +13,19 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 public class Users extends BaseEntity {
 
     private String username;
     private String email;
     private String password;
+
+    public Users(String username, String email, String password, Boolean isActived) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.isActived = isActived;
+    }
 
     @Column(name = "is_activated")
     private Boolean isActived;
