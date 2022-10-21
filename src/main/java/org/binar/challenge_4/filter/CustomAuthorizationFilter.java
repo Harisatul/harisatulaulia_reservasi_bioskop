@@ -59,6 +59,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     ExceptionResponse exceptionResponse = new ExceptionResponse(
                             List.of(exception.getMessage()),FORBIDDEN.toString() ,FORBIDDEN.value());
                     response.setContentType(APPLICATION_JSON_VALUE);
+                    logger.info(exceptionResponse.getMessages());
                     ObjectMapper objectMapper = new ObjectMapper();
                     objectMapper.registerModule(new JavaTimeModule());
                     response.setStatus(FORBIDDEN.value());
