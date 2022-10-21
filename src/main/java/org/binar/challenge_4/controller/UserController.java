@@ -35,7 +35,6 @@ import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping("cinema/api/v1/users")
 public class UserController {
 
     private UserService userService;
@@ -46,7 +45,7 @@ public class UserController {
 
 
 
-    @GetMapping
+    @GetMapping("cinema/api/v1/users")
     @Operation(
             tags = {"User"},
             operationId = "getAllUser",
@@ -72,13 +71,13 @@ public class UserController {
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
 
-    @GetMapping("{username}")
+    @GetMapping("cinema/api/v1/users/{username}")
     public ResponseEntity<Users> getUserByUsername(@PathVariable String username) {
         Users userByUsername = userService.getUserByUsername(username);
         return new ResponseEntity<>(userByUsername,OK);
     }
 
-    @PostMapping("/signup")
+    @PostMapping("cinema/api/v1/users/signup")
     @Operation(
             tags = {"User"},
             operationId = "addUser",
@@ -115,7 +114,7 @@ public class UserController {
         return userResponseEntity;
     }
 
-    @PutMapping("{username}")
+    @PutMapping("cinema/api/v1/users{username}")
     @Operation(
             tags = {"User"},
             operationId = "updateUser",
@@ -152,7 +151,7 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("{username}")
+    @DeleteMapping("cinema/api/v1/users/{username}")
     @Operation(
             tags = {"User"},
             operationId = "deletelUser",
@@ -181,7 +180,7 @@ public class UserController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-    @GetMapping("/refresh")
+    @GetMapping("cinema/api/v1/users/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authHeader = request.getHeader(AUTHORIZATION);
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
