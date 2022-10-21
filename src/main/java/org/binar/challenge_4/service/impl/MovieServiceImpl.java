@@ -1,5 +1,6 @@
 package org.binar.challenge_4.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.binar.challenge_4.entities.Movie;
 import org.binar.challenge_4.entities.Schedule;
 import org.binar.challenge_4.payload.ApiResponse;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@Slf4j
 public class MovieServiceImpl implements MovieService {
 
     private MovieRepository movieRepository;
@@ -25,18 +27,21 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public ApiResponse getAllMovie() {
         List<Movie> all = movieRepository.findAll();
+        log.info("Info :  fetch all movie data success");
         return new ApiResponse(Boolean.TRUE, "success", all);
     }
 
     @Override
     public ApiResponse addMovie(Movie movie) {
         Movie save = movieRepository.save(movie);
+        log.info("Info :  add movie data success");
         return new ApiResponse(Boolean.TRUE, "successfully added" + movie.getMovieTittle(), save);
     }
 
     @Override
     public ApiResponse updateMovie(Long id) {
         Movie movie = movieRepository.findById(id).orElseThrow();
+        log.info("Info :  add update data success");
         return new ApiResponse(Boolean.TRUE, "successfully update", movie);
     }
 
@@ -44,6 +49,7 @@ public class MovieServiceImpl implements MovieService {
     public ApiResponse deleteMovie(Long id) {
         Movie movie = movieRepository.findById(id).orElseThrow();
         movieRepository.delete(movie);
+        log.info("Info :  add delete data success");
         return new ApiResponse(Boolean.TRUE, "successfully deleted movie with id " + id);
     }
 

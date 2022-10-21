@@ -35,6 +35,7 @@ import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
+@RequestMapping("cinema/api/v1/users")
 public class UserController {
 
     private UserService userService;
@@ -44,8 +45,7 @@ public class UserController {
     }
 
 
-
-    @GetMapping("cinema/api/v1/users")
+    @GetMapping("/getuser")
     @Operation(
             tags = {"User"},
             operationId = "getAllUser",
@@ -71,13 +71,13 @@ public class UserController {
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
 
-    @GetMapping("cinema/api/v1/users/{username}")
+    @GetMapping("{username}")
     public ResponseEntity<Users> getUserByUsername(@PathVariable String username) {
         Users userByUsername = userService.getUserByUsername(username);
         return new ResponseEntity<>(userByUsername,OK);
     }
 
-    @PostMapping("cinema/api/v1/users/signup")
+    @PostMapping("signup")
     @Operation(
             tags = {"User"},
             operationId = "addUser",
@@ -114,7 +114,7 @@ public class UserController {
         return userResponseEntity;
     }
 
-    @PutMapping("cinema/api/v1/users{username}")
+    @PutMapping("{username}")
     @Operation(
             tags = {"User"},
             operationId = "updateUser",
@@ -151,7 +151,7 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("cinema/api/v1/users/{username}")
+    @DeleteMapping("{username}")
     @Operation(
             tags = {"User"},
             operationId = "deletelUser",
@@ -180,7 +180,7 @@ public class UserController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-    @GetMapping("cinema/api/v1/users/refresh")
+    @GetMapping("refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authHeader = request.getHeader(AUTHORIZATION);
         if (authHeader != null && authHeader.startsWith("Bearer ")) {

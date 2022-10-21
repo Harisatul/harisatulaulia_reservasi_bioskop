@@ -1,5 +1,6 @@
 package org.binar.challenge_4.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.binar.challenge_4.entities.Order;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class OrderServiceImpl implements OrderService {
 
     private OrderRepository orderRepository;
@@ -34,7 +36,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public JasperPrint generateInvoice(Long orderId) throws FileNotFoundException, JRException {
 
-        Order order = orderRepository.findById(orderId).orElseThrow(() -> new ResourceNotFoundException("Order", "id", orderId));
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> {
+                    log.error("ERROR : "+ "Email is already taken");
+                    return new ResourceNotFoundException("Order", "id", orderId);
+                });
         Map<String, Object> dataMap = dataParameter(order);
         List<Order> ordersCollect = new LinkedList<>();
         ordersCollect.add(order);
@@ -46,6 +52,7 @@ public class OrderServiceImpl implements OrderService {
                 , dataMap
                 , new JREmptyDataSource()
         );
+        log.info("Info :  generated invoice success");
         return jasperPrint;
     }
 
@@ -65,6 +72,7 @@ public class OrderServiceImpl implements OrderService {
         dataMap.put("movieEnd", movieEnd);
         dataMap.put("seat", seat);
         dataMap.put("id", "12212");
+        log.info("Info :  mapping data from database success");
         return dataMap;
     }
 }
