@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.binar.challenge_4.dto.UserDTO;
 import org.binar.challenge_4.entities.Role;
 import org.binar.challenge_4.entities.Users;
 import org.binar.challenge_4.exception.ExceptionResponse;
@@ -71,8 +72,8 @@ public class UserController {
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
 
-    @GetMapping("/username")
-    public ResponseEntity<Users> getUserByUsername(@RequestBody String username) {
+    @GetMapping("{username}")
+    public ResponseEntity<Users> getUserByUsername(@PathVariable String username) {
         Users userByUsername = userService.getUserByUsername(username);
         return new ResponseEntity<>(userByUsername,OK);
     }
@@ -109,8 +110,8 @@ public class UserController {
             }
 
     )
-    public ResponseEntity<Users> addUser(@RequestBody Users user){
-        ResponseEntity<Users> userResponseEntity = userService.addUser(user);
+    public ResponseEntity<Users> addUser(@RequestBody UserDTO users){
+        ResponseEntity<Users> userResponseEntity = userService.addUser(users);
         return userResponseEntity;
     }
 
