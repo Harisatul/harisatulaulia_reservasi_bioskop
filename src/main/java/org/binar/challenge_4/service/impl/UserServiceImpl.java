@@ -1,6 +1,8 @@
 package org.binar.challenge_4.service.impl;
 
 import org.binar.challenge_4.entities.Users;
+import org.binar.challenge_4.exception.BadRequestException;
+import org.binar.challenge_4.exception.ResourceNotFoundException;
 import org.binar.challenge_4.payload.ApiResponse;
 import org.binar.challenge_4.repository.UserRepository;
 import org.binar.challenge_4.service.UserService;
@@ -28,6 +30,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<Users> addUser(Users user) {
+        if (userRepository.findUsersByUsername(user.getUsername()).isPresent()) {
+            ApiResponse apiResponse = new ApiResponse(Boolean.FALSE, "Username is already taken");
+            throw new BadRequestException(apiResponse);
+        }
         Users save = userRepository.save(user);
         return new ResponseEntity<>(save, HttpStatus.CREATED);
     }
@@ -46,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ApiResponse deleteUsers(String username) {
-        Users users = userRepository.findUsersByUsername(username).orElseThrow();
+        Users users = userRepository.findUsersByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", "id", username));
         userRepository.delete(users);
         return new ApiResponse(true, "Successfully delete profile " + username);
     }

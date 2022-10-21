@@ -29,16 +29,17 @@ To deploy this project run
 - Update User
 - get All Users
 - Delete User
-`Movie`
+    
+`MOVIE`
 - Add Movie
 - Update Movie
 - get All Movies
 - Delete Movie
+
 `Schedule`
 - Add Schedule
 - get All Schedules on premiered movie 
 - get All Schedules of certain movie using Movie Id
-
 
 
 

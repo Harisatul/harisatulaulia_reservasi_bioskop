@@ -12,6 +12,10 @@ import java.util.List;
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
+    Schedule findScheduleById(Long sheduleId);
     List<Schedule> findScheduleByMoviesId(@Param("id") Long id);
     List<Schedule> findScheduleByMoviesIsPremiered(@Param("is") Boolean is);
+
+
+
 }
