@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.OK;
+
 @RestController
 @RequestMapping("cinema/api/v1/users")
 public class UserController {
@@ -50,6 +52,12 @@ public class UserController {
     public ResponseEntity<List<Users>> getAllUser(){
         List<Users> allUsers = userService.getAllUsers();
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
+    }
+
+    @GetMapping("/username")
+    public ResponseEntity<Users> getUserByUsername(@RequestBody String username) {
+        Users userByUsername = userService.getUserByUsername(username);
+        return new ResponseEntity<>(userByUsername,OK);
     }
 
     @PostMapping
