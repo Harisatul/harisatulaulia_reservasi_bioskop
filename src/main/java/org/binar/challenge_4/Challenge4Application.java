@@ -7,9 +7,10 @@ import io.swagger.v3.oas.annotations.servers.Server;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @SpringBootApplication
@@ -22,7 +23,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 		servers = {@Server(url = "http://localhost:8080/cinema/api/v1", description = "Development")},
 		tags = {
 				@Tag(name = "User", description = "This is the simple CRUD operation for User entities."),
-				@Tag(name = "movie", description = "This is the simple CRUD operation for Movie entities."),
+				@Tag(name = "Movie", description = "This is the simple CRUD operation for Movie entities."),
 				@Tag(name = "Schedule", description = "This is the simple CRUD operation for Schedule entities."),
 				@Tag(name = "Order", description = "This is the simple CRUD operation for Order entities."),
 		}
@@ -31,6 +32,11 @@ public class Challenge4Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Challenge4Application.class, args);
+	}
+
+	@Bean
+	BCryptPasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder();
 	}
 
 }
