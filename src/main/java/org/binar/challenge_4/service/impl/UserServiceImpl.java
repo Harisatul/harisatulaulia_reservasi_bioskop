@@ -33,7 +33,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Users users = userRepository.findUsersByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found in database "));
+                .orElseThrow(() -> {
+                    log.error("ERROR : "+ "User not found in database ");
+                    throw new UsernameNotFoundException("User not found in database ");
+                });
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         users.getRoles().forEach(role -> {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
@@ -58,10 +61,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public ResponseEntity<Users> addUser(UserDTO user) {
         if (userRepository.findUsersByUsername(user.getUsername()).isPresent()) {
             ApiResponse apiResponse = new ApiResponse(Boolean.FALSE, "Username is already taken");
+            log.error("ERROR : "+ "Username is already taken");
             throw new BadRequestException(apiResponse);
         }
         if (userRepository.findUsersByEmail(user.getEmail()).isPresent()){
             ApiResponse apiResponse = new ApiResponse(Boolean.FALSE, "Email is already taken");
+            log.error("ERROR : "+ "Email is already taken");
             throw new BadRequestException(apiResponse);
         }
         List<String> reqRole = user.getRole();
@@ -69,27 +74,38 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         if (reqRole == null){
             Role userRole = roleRepository.findRoleByName("ROLE_USERS").orElseThrow();
+            log.info("Info : "+ user.getUsername() + " has assigned to ROLE_USER");
             roles.add(userRole);
         }else{
             reqRole.forEach(role -> {
                 switch (role){
                     case "ROLE_ADMIN" :
                         Role adminRole = roleRepository.findRoleByName("ROLE_ADMIN").orElseThrow(
-                                () -> new ResourceNotFoundException("Role", "role", "ROLE_ADMIN"));
+                                () -> {
+                                    log.error("ERROR : "+ "ROLE_ADMIN NOT FOUND");
+                                    throw new ResourceNotFoundException("Role", "role", "ROLE_ADMIN");
+                                });
                         roles.add(adminRole);
+                        log.info("Info : "+ user.getUsername() + " has assigned to ROLE_ADMIN");
                         break;
                     default:
                         Role userRole = roleRepository.findRoleByName("ROLE_USERS").orElseThrow(
-                                () -> new ResourceNotFoundException("Role", "role", "ROLE_USERS"));
+                                () -> {
+                                    log.error("ERROR : "+ "ROLE_USERS NOT FOUND");
+                                    throw new ResourceNotFoundException("Role", "role", "ROLE_USERS");
+                                });
                         roles.add(userRole);
+                        log.info("Info : "+ user.getUsername() + " has assigned to ROLE_USERS");
+                        break;
                 }
             });
         }
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        log.info("Info : Password has been encrypted" );
         Users entity = new Users(user.getUsername(), user.getEmail(), user.getPassword(), true);
         entity.setRoles(roles);
         Users save = userRepository.save(entity);
-        System.out.println(save);
+        log.info("Info : Successfully saved user data with username : " + user.getUsername());
         return new ResponseEntity<>(save, HttpStatus.CREATED);
     }
 
@@ -101,6 +117,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             users.setEmail(newUser.getEmail());
             users.setPassword(newUser.getPassword());
             userRepository.save(users);
+            log.info("Info : Successfully updated user data with username : " + newUser.getUsername());
         }
         return users;
     }
@@ -109,14 +126,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public Users getUserByUsername(String username) {
         System.out.println(username);
         Users users = userRepository.findUsersByUsername(username).orElseThrow(
-                () -> new ResourceNotFoundException("User", "username", username));
+                () -> {
+                    log.error("ERROR : User with username " + username + "NOT FOUND");
+                    throw  new ResourceNotFoundException("User", "username", username);
+                });
+        log.info("Info : Successfully get user data with username : " + username);
         return users;
     }
 
     @Override
     public ApiResponse deleteUsers(String username) {
-        Users users = userRepository.findUsersByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", "id", username));
+        Users users = userRepository.findUsersByUsername(username).orElseThrow(() -> {
+            log.error("ERROR : User with username " + username + "NOT FOUND");
+            throw new ResourceNotFoundException("User", "id", username);
+        });
         userRepository.delete(users);
+        log.info("Info : Successfully delete user data with username : " + username);
         return new ApiResponse(true, "Successfully delete profile " + username);
     }
 }
