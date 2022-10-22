@@ -45,7 +45,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/getuser")
+    @GetMapping("getuser")
     @Operation(
             tags = {"User"},
             operationId = "getAllUser",
