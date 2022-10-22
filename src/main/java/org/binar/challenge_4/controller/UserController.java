@@ -35,7 +35,7 @@ import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping("cinema/api/v1/users")
+@RequestMapping("/cinema/api/v1/users/")
 public class UserController {
 
     private UserService userService;
@@ -45,7 +45,7 @@ public class UserController {
     }
 
 
-    @GetMapping("getuser")
+    @GetMapping("/getuser")
     @Operation(
             tags = {"User"},
             operationId = "getAllUser",
@@ -77,7 +77,7 @@ public class UserController {
         return new ResponseEntity<>(userByUsername,OK);
     }
 
-    @PostMapping("signup")
+    @PostMapping("/signup")
     @Operation(
             tags = {"User"},
             operationId = "addUser",
