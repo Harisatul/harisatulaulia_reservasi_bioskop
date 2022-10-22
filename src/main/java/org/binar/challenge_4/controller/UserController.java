@@ -35,7 +35,7 @@ import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping("/cinema/api/v1/users/")
+@RequestMapping("/users")
 public class UserController {
 
     private UserService userService;
