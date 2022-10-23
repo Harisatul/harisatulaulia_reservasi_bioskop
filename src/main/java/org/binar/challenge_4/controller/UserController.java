@@ -44,7 +44,7 @@ public class UserController {
     }
 
 
-    @GetMapping("cinema/api/v1/users/signup")
+    @GetMapping("cinema/api/v1/users/getuser")
     @Operation(
             tags = {"User"},
             operationId = "getAllUser",
