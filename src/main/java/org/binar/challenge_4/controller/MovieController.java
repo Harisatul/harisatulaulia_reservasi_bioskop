@@ -57,16 +57,6 @@ public class MovieController {
             description = "to add movie data. id required as path of endpoint",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "This is the request body for add Movie request.",
                     content = @Content(schema = @Schema(implementation = Movie.class))),
-            parameters = {
-                    @Parameter(name = "movieTittle", description = "this is movie Tittle. represent tittle of movie",
-                            example = "House of the Dragon)",schema = @Schema(type = "String")),
-                    @Parameter(name = "description", description = "this is description of movie. represent description of movie",
-                            example = "The Targaryen dynasty is at the absolute apex of its power, with more than 15 dragons under their yoke. " +
-                                    "Most empires crumble from such heights. In the case of the Targaryens, their slow fall begins when King " +
-                                    "Viserys breaks with a century of tradition by naming his daughter Rhaenyra heir to the Iron Throne. ",
-                            required = true,  schema = @Schema(type = "String")),
-                    @Parameter(name = "isPremiered", description = "this is boolean condition of movie whether its premiered or not. should passing true or falsevalue",
-                            example = "true", required = true, schema = @Schema(type = "Boolean"))},
             responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
                     content = @Content(
                             schema = @Schema(implementation = Movie.class, type = "String"),mediaType = MediaType.APPLICATION_JSON_VALUE),
@@ -95,15 +85,8 @@ public class MovieController {
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "This is the request body for update Movie request.",
                     content = @Content(schema = @Schema(implementation = Movie.class))),
             parameters = {
-                    @Parameter(name = "movieTittle", description = "this is movie Tittle. represent tittle of movie",
-                            example = "House of the Dragon)",schema = @Schema(type = "String")),
-                    @Parameter(name = "description", description = "this is description of movie. represent description of movie",
-                            example = "The Targaryen dynasty is at the absolute apex of its power, with more than 15 dragons under their yoke. " +
-                                    "Most empires crumble from such heights. In the case of the Targaryens, their slow fall begins when King " +
-                                    "Viserys breaks with a century of tradition by naming his daughter Rhaenyra heir to the Iron Throne. ",
-                            required = true,  schema = @Schema(type = "String")),
-                    @Parameter(name = "isPremiered", description = "this is boolean condition of movie whether its premiered or not. should passing true or falsevalue",
-                            example = "true", required = true, schema = @Schema(type = "Boolean"))},
+                    @Parameter(name = "id", description = "this is movie id. represent id of movie",
+                            example = "3",schema = @Schema(type = "Long"))},
             responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
                     content = @Content(
                             schema = @Schema(implementation = Movie.class, type = "String"),mediaType = MediaType.APPLICATION_JSON_VALUE),
@@ -131,8 +114,8 @@ public class MovieController {
             summary = "delete Movie by Id ",
             description = "to delete movie data",
             parameters = {
-                    @Parameter(name = "movieId", description = "this is movieId.",
-                            example = "1",schema = @Schema(type = "Long"))},
+                    @Parameter(name = "id", description = "this is movie id. represent id of movie",
+                            example = "3",schema = @Schema(type = "Long"))},
             responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
                     content = @Content(
                             schema = @Schema(implementation = ApiResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE),

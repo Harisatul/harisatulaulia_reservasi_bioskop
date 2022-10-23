@@ -33,15 +33,6 @@ public class ScheduleController {
             description = "to add schedule data.",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "This is the request body for add Schedule request.",
                     content = @Content(schema = @Schema(implementation = Schedule.class))),
-            parameters = {
-                    @Parameter(name = "premiereDate", description = "this is premieredDate. should be correct format (YY:MM:DD). see example below",
-                            example = "2022-10-10",schema = @Schema(type = "String")),
-                    @Parameter(name = "price", description = "this is price. should be integer",
-                            example = "45000", required = true,  schema = @Schema(type = "Long")),
-                    @Parameter(name = "hourStart", description = "this is hourStart. should be correct format (HH:MM:SS). see example below",
-                            example = "12:01:23", required = true, schema = @Schema(type = "String")),
-                    @Parameter(name = "hourEnd", description = "this is hourStart. should be correct format (HH:MM:SS). see example below",
-                            example = "12:01:23", required = true, schema = @Schema(type = "String"))},
             responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
                     content = @Content(
                             schema = @Schema(implementation = Schedule.class, type = "String"),mediaType = MediaType.APPLICATION_JSON_VALUE),
