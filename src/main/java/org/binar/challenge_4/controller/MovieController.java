@@ -85,8 +85,8 @@ public class MovieController {
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "This is the request body for update Movie request.",
                     content = @Content(schema = @Schema(implementation = Movie.class))),
             parameters = {
-                    @Parameter(name = "movieId", description = "this is movie ID. represent id of movie",
-                            example = "2",schema = @Schema(type = "Long"))},
+                    @Parameter(name = "id", description = "this is movie id. represent id of movie",
+                            example = "3",schema = @Schema(type = "Long"))},
             responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
                     content = @Content(
                             schema = @Schema(implementation = Movie.class, type = "String"),mediaType = MediaType.APPLICATION_JSON_VALUE),
