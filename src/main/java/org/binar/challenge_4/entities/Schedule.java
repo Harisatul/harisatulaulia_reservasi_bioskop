@@ -3,6 +3,9 @@ package org.binar.challenge_4.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 import javax.persistence.*;
@@ -11,10 +14,22 @@ import java.time.LocalTime;
 import java.util.List;
 
 
-@Data
+@Getter
+@Setter
 @Entity
+@NoArgsConstructor
 public class Schedule extends BaseEntity{
 
+
+    public Schedule(LocalDate premieredDate, Integer price,
+                    LocalTime hourStart, LocalTime hourEnd, Movie movie, Studio studio) {
+        this.premieredDate = premieredDate;
+        this.price = price;
+        this.hourStart = hourStart;
+        this.hourEnd = hourEnd;
+        this.movies = movie;
+        this.studio = studio;
+    }
 
     @Column(name = "premiere_date")
     @JsonFormat(pattern = "dd-MM-yyyy")
