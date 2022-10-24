@@ -85,15 +85,6 @@ public class UserController {
             description = "to add user data.",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "This is the request body for update User request.",
                     content = @Content(schema = @Schema(implementation = Users.class))),
-            parameters = {
-                    @Parameter(name = "username", description = "this is username. should be unique",
-                            example = "andrew",schema = @Schema(type = "String")),
-                    @Parameter(name = "email", description = "this is email. should be unique",
-                            example = "andrew@gmail.com", required = true,  schema = @Schema(type = "String")),
-                    @Parameter(name = "password", description = "this is password. Strongly combined password suggested",
-                            example = "@nDrew!23", required = true, schema = @Schema(type = "String")),
-                    @Parameter(name = "isActive", description = "this is boolean. should passing true value",
-                            example = "true", required = true, schema = @Schema(type = "String"))},
             responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
                     content = @Content(
                             schema = @Schema(implementation = Users.class, type = "String"),mediaType = MediaType.APPLICATION_JSON_VALUE),
@@ -124,13 +115,7 @@ public class UserController {
                     content = @Content(schema = @Schema(implementation = Users.class))),
             parameters = {
                           @Parameter(name = "username", description = "this is username. should be unique",
-                            example = "andrew",schema = @Schema(type = "String")),
-                          @Parameter(name = "email", description = "this is email. should be unique",
-                                  example = "andrew@gmail.com", required = true,  schema = @Schema(type = "String")),
-                          @Parameter(name = "password", description = "this is password. Strongly combined password suggested",
-                                  example = "@nDrew!23", required = true, schema = @Schema(type = "String")),
-                          @Parameter(name = "isActive", description = "this is boolean. should passing true value",
-                                example = "true", required = true, schema = @Schema(type = "String"))},
+                            example = "andrew",schema = @Schema(type = "String"))},
             responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
                     content = @Content(
                             schema = @Schema(implementation = Users.class, type = "String"),mediaType = MediaType.APPLICATION_JSON_VALUE),
@@ -155,7 +140,7 @@ public class UserController {
     @Operation(
             tags = {"User"},
             operationId = "deletelUser",
-            summary = "delete user by Usernam ",
+            summary = "delete user by Username",
             description = "to delete user data",
             parameters = {
                     @Parameter(name = "username", description = "this is username. should be found",
