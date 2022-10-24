@@ -25,7 +25,7 @@ public class ScheduleController {
         this.scheduleService = scheduleService;
     }
 
-    @PostMapping
+    @PostMapping("/addschedule")
     @Operation(
             tags = {"Schedule"},
             operationId = "addSchedule",
