@@ -5,8 +5,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.binar.challenge_4.dto.ScheduleDTO;
 import org.binar.challenge_4.entities.Schedule;
-import org.binar.challenge_4.entities.Users;
 import org.binar.challenge_4.exception.ExceptionResponse;
 import org.binar.challenge_4.payload.ApiResponse;
 import org.binar.challenge_4.service.ScheduleService;
@@ -35,7 +35,7 @@ public class ScheduleController {
                     content = @Content(schema = @Schema(implementation = Schedule.class))),
             responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
                     content = @Content(
-                            schema = @Schema(implementation = Schedule.class, type = "String"),mediaType = MediaType.APPLICATION_JSON_VALUE),
+                            schema = @Schema(implementation = ScheduleDTO.class, type = "String"),mediaType = MediaType.APPLICATION_JSON_VALUE),
                     description = "Success Response."),
                     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400",
                             content = @Content(schema = @Schema(implementation = ExceptionResponse.class),
@@ -48,7 +48,7 @@ public class ScheduleController {
             }
 
     )
-    public ResponseEntity<ApiResponse> saveSchedule(@RequestBody Schedule schedule){
+    public ResponseEntity<ApiResponse> saveSchedule(@RequestBody ScheduleDTO schedule){
         ApiResponse apiResponse = scheduleService.addSchedule(schedule);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
