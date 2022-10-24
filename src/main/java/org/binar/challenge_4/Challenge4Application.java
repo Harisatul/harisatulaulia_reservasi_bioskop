@@ -20,7 +20,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 		info = @Info(contact =  @Contact(name = "Harisatul Aulia", email = "haris.auia404@gmail.com"),
 				title = "Cinema RESTfull API", version = "1.0.0",
 				description = "Simple cinema RESTful API with Spring REST. provide basic CRUD Operation for Cinema API"),
-		servers = {@Server(url = "http://localhost:8080/cinema/api/v1", description = "Development")},
+		servers = {
+				@Server(url = "http://localhost:8080/cinema/api/v1", description = "Development"),
+				@Server(url = "https://harisatulauliacinemaapp.up.railway.app/cinema/api/v1", description = "Production")},
 		tags = {
 				@Tag(name = "User", description = "This is the simple CRUD operation for User entities."),
 				@Tag(name = "Movie", description = "This is the simple CRUD operation for Movie entities."),
