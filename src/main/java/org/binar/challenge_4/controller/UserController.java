@@ -139,7 +139,7 @@ public class UserController {
     @Operation(
             tags = {"User"},
             operationId = "deletelUser",
-            summary = "delete user by Usernam ",
+            summary = "delete user by Username",
             description = "to delete user data",
             parameters = {
                     @Parameter(name = "username", description = "this is username. should be found",

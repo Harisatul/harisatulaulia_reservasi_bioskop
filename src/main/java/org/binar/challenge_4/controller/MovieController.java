@@ -24,7 +24,7 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @GetMapping
+    @GetMapping("/getmovie")
     @Operation(
             tags = {"Movie"},
             operationId = "getAllMovie",
@@ -49,7 +49,7 @@ public class MovieController {
         ApiResponse apiResponse = movieService.getAllMovie();
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
-    @PostMapping
+    @PostMapping("/addmovie")
     @Operation(
             tags = {"Movie"},
             operationId = "addMovie",
