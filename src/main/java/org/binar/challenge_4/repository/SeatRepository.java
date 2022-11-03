@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface SeatRepository extends JpaRepository<Seat, Long> {
 
-    List<Seat> findAllByStudiosIdAndIsAvailable(Long studios_id,  Boolean isAvailable);
+    List<Seat> findAllByStudiosIdAndIsAvailable(Long studiosId,  Boolean isAvailable);
 }

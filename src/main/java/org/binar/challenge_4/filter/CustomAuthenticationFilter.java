@@ -55,26 +55,26 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         log.info("Info :  successfully authentication user");
         User user = (User) authentication.getPrincipal();
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
-        String access_token = JWT.create()
+        String accessToken = JWT.create()
                 .withSubject(user.getUsername())
                 // token expires in 7 minutes
                 .withExpiresAt(new Date(System.currentTimeMillis() + 7 * 60 * 1000))
-                .withIssuer(request.getRequestURI().toString())
+                .withIssuer(request.getRequestURI())
                 .withClaim("roles", user.getAuthorities()
                         .stream()
-                        .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+                        .map(GrantedAuthority::getAuthority).toList())
                 .sign(algorithm);
-        response.setHeader("access_token", access_token);
+        response.setHeader("access_token", accessToken);
         log.info("Info :  successfully generated access token user");
-        String refresh_token = JWT.create()
+        String refreshToken = JWT.create()
                 .withSubject(user.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 70 * 60 * 1000))
                 .withIssuer(request.getRequestURL().toString())
                 .sign(algorithm);
         log.info("Info :  successfully generated refresh token user");
         HashMap<String, String> tokens = new HashMap<>();
-        tokens.put("access_token", access_token);
-        tokens.put("refresh_token", refresh_token);
+        tokens.put("access_token", accessToken);
+        tokens.put("refresh_token", refreshToken);
         response.setContentType(APPLICATION_JSON_VALUE);
         ApiResponse apiResponse = new ApiResponse(Boolean.TRUE, "Successfully Login",tokens);
         new ObjectMapper().writeValue(response.getOutputStream(), apiResponse);

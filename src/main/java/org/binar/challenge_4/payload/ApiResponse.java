@@ -26,7 +26,7 @@ public class ApiResponse implements Serializable {
     private HttpStatus httpStatus;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Object data;
+    private transient Object data;
 
     public ApiResponse() {
     }

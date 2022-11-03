@@ -100,8 +100,7 @@ public class UserController {
 
     )
     public ResponseEntity<Users> addUser(@RequestBody UserDTO users){
-        ResponseEntity<Users> userResponseEntity = userService.addUser(users);
-        return userResponseEntity;
+        return userService.addUser(users);
     }
 
     @PutMapping("cinema/api/v1/users/{username}")
@@ -169,22 +168,22 @@ public class UserController {
         String authHeader = request.getHeader(AUTHORIZATION);
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             try {
-                String refresh_token = authHeader.substring("Bearer ".length());
+                String refreshToken = authHeader.substring("Bearer ".length());
                 Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
                 JWTVerifier verifier = JWT.require(algorithm).build();
-                DecodedJWT decodedJWT = verifier.verify(refresh_token);
+                DecodedJWT decodedJWT = verifier.verify(refreshToken);
                 String username = decodedJWT.getSubject();
                 Users userByUsername = userService.getUserByUsername(username);
 
-                String access_token = JWT.create()
+                String accessToken = JWT.create()
                         .withSubject(userByUsername.getUsername())
                         .withExpiresAt(new Date(System.currentTimeMillis() + 1 * 60 * 1000))
-                        .withIssuer(request.getRequestURI().toString())
+                        .withIssuer(request.getRequestURI())
                         .withClaim("roles", userByUsername.getRoles().stream().map(Role::getName).collect(Collectors.toList()))
                         .sign(algorithm);
                 HashMap<String, String> tokens = new HashMap<>();
-                tokens.put("access_token", access_token);
-                tokens.put("refresh_token", refresh_token);
+                tokens.put("access_token", accessToken);
+                tokens.put("refresh_token", refreshToken);
                 response.setContentType(APPLICATION_JSON_VALUE);
                 ApiResponse apiResponse = new ApiResponse(Boolean.TRUE, "Successfully created new access token",tokens);
                 new ObjectMapper().writeValue(response.getOutputStream(), apiResponse);
@@ -198,7 +197,11 @@ public class UserController {
                 objectMapper.writeValue(response.getOutputStream(),exceptionResponse);
             }
         }else {
-            throw new RuntimeException("Refresh token is missing");
+
+            ExceptionResponse exceptionResponse = new ExceptionResponse(
+                    List.of("Refresh token is missing"), "Bad Request", 401);
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.writeValue(response.getOutputStream(),exceptionResponse);
         }
     }
 

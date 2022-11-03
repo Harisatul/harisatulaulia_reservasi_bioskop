@@ -18,7 +18,7 @@ public class Movie extends BaseEntity{
     private Boolean isPremiered;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "movies_genre")
+    @ManyToMany(mappedBy = "moviesGenre")
     private Set<Genre> movies ;
 
     @JsonIgnore

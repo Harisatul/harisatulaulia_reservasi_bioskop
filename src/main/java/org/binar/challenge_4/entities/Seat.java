@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 public class Seat extends BaseEntity{
 
-    private Long seat_number;
+    private Long seatNumber;
     private Boolean isAvailable;
     @ManyToOne
     @JoinColumn (name = "studio_id")

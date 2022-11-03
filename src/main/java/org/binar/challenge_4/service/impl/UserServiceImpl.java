@@ -30,17 +30,20 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private final RoleRepository roleRepository;
 
+    private final String ERROR = "ERROR : ";
+    private final String ROLE_USERS = "ROLE_USERS";
+    private final String ROLE_ADMIN = "ROLE_ADMIN";
+    private final String INFO = "INFO  : ";
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Users users = userRepository.findUsersByUsername(username)
                 .orElseThrow(() -> {
-                    log.error("ERROR : "+ "User not found in database ");
+                    log.error(ERROR + "User not found in database ");
                     throw new UsernameNotFoundException("User not found in database ");
                 });
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        users.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        });
+        users.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
         return new org.springframework.security.core.userdetails.User(users.getUsername(), users.getPassword(), authorities);
     }
 
@@ -61,38 +64,38 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public ResponseEntity<Users> addUser(UserDTO user) {
         if (userRepository.findUsersByUsername(user.getUsername()).isPresent()) {
             ApiResponse apiResponse = new ApiResponse(Boolean.FALSE, "Username is already taken");
-            log.error("ERROR : "+ "Username is already taken");
+            log.error(ERROR+ "Username is already taken");
             throw new BadRequestException(apiResponse);
         }
         if (userRepository.findUsersByEmail(user.getEmail()).isPresent()){
             ApiResponse apiResponse = new ApiResponse(Boolean.FALSE, "Email is already taken");
-            log.error("ERROR : "+ "Email is already taken");
+            log.error(ERROR+ "Email is already taken");
             throw new BadRequestException(apiResponse);
         }
         List<String> reqRole = user.getRole();
         List<Role> roles = new LinkedList<>();
 
         if (reqRole == null){
-            Role userRole = roleRepository.findRoleByName("ROLE_USERS").orElseThrow();
-            log.info("Info : "+ user.getUsername() + " has assigned to ROLE_USER");
+            Role userRole = roleRepository.findRoleByName(ROLE_USERS).orElseThrow();
+            log.info(INFO + user.getUsername() + " has assigned to ROLE_USER");
             roles.add(userRole);
         }else{
             reqRole.forEach(role -> {
                 switch (role){
-                    case "ROLE_ADMIN" :
-                        Role adminRole = roleRepository.findRoleByName("ROLE_ADMIN").orElseThrow(
+                    case ROLE_ADMIN:
+                        Role adminRole = roleRepository.findRoleByName(ROLE_ADMIN).orElseThrow(
                                 () -> {
-                                    log.error("ERROR : "+ "ROLE_ADMIN NOT FOUND");
-                                    throw new ResourceNotFoundException("Role", "role", "ROLE_ADMIN");
+                                    log.error(ERROR+ "ROLE_ADMIN NOT FOUND");
+                                    throw new ResourceNotFoundException("Role", "role", ROLE_ADMIN);
                                 });
                         roles.add(adminRole);
                         log.info("Info : "+ user.getUsername() + " has assigned to ROLE_ADMIN");
                         break;
                     default:
-                        Role userRole = roleRepository.findRoleByName("ROLE_USERS").orElseThrow(
+                        Role userRole = roleRepository.findRoleByName(ROLE_USERS).orElseThrow(
                                 () -> {
                                     log.error("ERROR : "+ "ROLE_USERS NOT FOUND");
-                                    throw new ResourceNotFoundException("Role", "role", "ROLE_USERS");
+                                    throw new ResourceNotFoundException("Role", "role", ROLE_USERS);
                                 });
                         roles.add(userRole);
                         log.info("Info : "+ user.getUsername() + " has assigned to ROLE_USERS");
@@ -124,7 +127,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public Users getUserByUsername(String username) {
-        System.out.println(username);
         Users users = userRepository.findUsersByUsername(username).orElseThrow(
                 () -> {
                     log.error("ERROR : User with username " + username + "NOT FOUND");

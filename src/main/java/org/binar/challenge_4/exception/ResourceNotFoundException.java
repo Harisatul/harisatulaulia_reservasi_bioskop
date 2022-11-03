@@ -9,9 +9,9 @@ public class ResourceNotFoundException extends RuntimeException {
 
     private transient ApiResponse apiResponse;
 
-    private String resourceName;
-    private String fieldName;
-    private Object fieldValue;
+    private final String resourceName;
+    private final String fieldName;
+    private final transient Object fieldValue;
 
     public ResourceNotFoundException(String resourceName, String fieldName, Object fieldValue) {
         super();
@@ -36,9 +36,8 @@ public class ResourceNotFoundException extends RuntimeException {
         return apiResponse;
     }
 
-    private void setApiResponse() {
+    public void setApiResponse() {
         String message = String.format("%s not found with %s: '%s'", resourceName, fieldName, fieldValue);
-
         apiResponse = new ApiResponse(Boolean.FALSE, message);
     }
 }
