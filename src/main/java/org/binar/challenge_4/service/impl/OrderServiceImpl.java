@@ -4,10 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.binar.challenge_4.entities.Order;
-import org.binar.challenge_4.entities.Seat;
 import org.binar.challenge_4.exception.ResourceNotFoundException;
 import org.binar.challenge_4.repository.OrderRepository;
-import org.binar.challenge_4.repository.SeatRepository;
 import org.binar.challenge_4.service.OrderService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
@@ -62,7 +60,7 @@ public class OrderServiceImpl implements OrderService {
         String movieEnd = String.format(orders.getSchedule().getHourEnd().toString(), "HH:MMta");
         String studioCode = orders.getSchedule().getStudio().getStudioCode();
         String movieTittle = orders.getSchedule().getMovies().getMovieTittle();
-        String seat = orders.getSeats().getSeat_number().toString();
+        String seat = orders.getSeats().getSeatNumber().toString();
 
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("studioCode", studioCode);

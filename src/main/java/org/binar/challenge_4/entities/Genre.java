@@ -12,11 +12,11 @@ import java.util.Set;
 @Entity
 public class Genre extends BaseEntity {
 
-    private String genre_name;
+    private String genreName;
 
     @ManyToMany
     @JoinTable(name = "movie_genre", joinColumns = @JoinColumn(name = "genre_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id"))
-    private Set<Movie> movies_genre;
+    private Set<Movie> moviesGenre;
 
 }

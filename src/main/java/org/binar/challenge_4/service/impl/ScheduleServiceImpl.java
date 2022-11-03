@@ -44,7 +44,6 @@ public class ScheduleServiceImpl implements ScheduleService {
         Schedule schedule = new Schedule(scheduleDTO.getPremieredDate(), scheduleDTO.getPrice(),
                 scheduleDTO.getHourStart(), scheduleDTO.getHourEnd(), movie, studio);
         Schedule save = scheduleRepository.save(schedule);
-        System.out.println(schedule);
         log.info("Info :  add update data success");
         return new ApiResponse(Boolean.TRUE, "success", save);
     }

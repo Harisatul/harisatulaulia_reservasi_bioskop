@@ -25,6 +25,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    private static final String ROLE_ADMIN = "ROLE_ADMIN";
+
     public SecurityConfiguration(UserDetailsService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userDetailsService = userDetailsService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -42,13 +44,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/login", "/cinema/api/v1/users/refresh").permitAll();
         http.authorizeRequests()
                 .antMatchers(GET, "/cinema/api/v1/users/")
-                .hasAnyAuthority("ROLE_USERS", "ROLE_ADMIN");
+                .hasAnyAuthority("ROLE_USERS", ROLE_ADMIN);
         http.authorizeRequests()
                 .antMatchers("/cinema/api/v1/movies/**")
-                .hasAnyAuthority("ROLE_ADMIN");
+                .hasAnyAuthority(ROLE_ADMIN);
         http.authorizeRequests()
                 .antMatchers(POST,"/cinema/api/v1/schedule")
-                .hasAnyAuthority("ROLE_ADMIN");
+                .hasAnyAuthority(ROLE_ADMIN);
         http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
