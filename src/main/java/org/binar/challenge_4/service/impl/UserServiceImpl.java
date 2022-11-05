@@ -30,10 +30,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private final RoleRepository roleRepository;
 
-    private final String ERROR = "ERROR : ";
-    private final String ROLE_USERS = "ROLE_USERS";
-    private final String ROLE_ADMIN = "ROLE_ADMIN";
-    private final String INFO = "INFO  : ";
+    private static final String ERROR = "ERROR : ";
+    private static final String ROLE_USERS = "ROLE_USERS";
+    private static final String ROLE_ADMIN = "ROLE_ADMIN";
+    private static final String INFO = "INFO  : ";
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -81,25 +81,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             roles.add(userRole);
         }else{
             reqRole.forEach(role -> {
-                switch (role){
-                    case ROLE_ADMIN:
-                        Role adminRole = roleRepository.findRoleByName(ROLE_ADMIN).orElseThrow(
-                                () -> {
-                                    log.error(ERROR+ "ROLE_ADMIN NOT FOUND");
-                                    throw new ResourceNotFoundException("Role", "role", ROLE_ADMIN);
-                                });
-                        roles.add(adminRole);
-                        log.info("Info : "+ user.getUsername() + " has assigned to ROLE_ADMIN");
-                        break;
-                    default:
-                        Role userRole = roleRepository.findRoleByName(ROLE_USERS).orElseThrow(
-                                () -> {
-                                    log.error("ERROR : "+ "ROLE_USERS NOT FOUND");
-                                    throw new ResourceNotFoundException("Role", "role", ROLE_USERS);
-                                });
-                        roles.add(userRole);
-                        log.info("Info : "+ user.getUsername() + " has assigned to ROLE_USERS");
-                        break;
+                if (ROLE_ADMIN.equals(role)) {
+                    Role adminRole = roleRepository.findRoleByName(ROLE_ADMIN).orElseThrow(
+                            () -> {
+                                log.error(ERROR + "ROLE_ADMIN NOT FOUND");
+                                throw new ResourceNotFoundException("Role", "role", ROLE_ADMIN);
+                            });
+                    roles.add(adminRole);
+                    log.info("Info : " + user.getUsername() + " has assigned to ROLE_ADMIN");
+                } else {
+                    Role userRole = roleRepository.findRoleByName(ROLE_USERS).orElseThrow(
+                            () -> {
+                                log.error(ERROR + "ROLE_USERS NOT FOUND");
+                                throw new ResourceNotFoundException("Role", "role", ROLE_USERS);
+                            });
+                    roles.add(userRole);
+                    log.info("Info : " + user.getUsername() + " has assigned to ROLE_USERS");
                 }
             });
         }
