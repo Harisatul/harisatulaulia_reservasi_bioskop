@@ -1,7 +1,7 @@
 package org.binar.orderschedule.exception;
 
 
-import org.binar.user.payload.ApiResponse;
+import org.binar.orderschedule.payload.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

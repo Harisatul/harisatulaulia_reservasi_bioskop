@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.binar.user.entities.BaseEntity;
-import org.binar.user.entities.Role;
 
 import javax.persistence.*;
 import java.util.LinkedList;
