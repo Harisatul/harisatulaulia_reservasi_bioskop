@@ -1,7 +1,7 @@
-package org.binar.challenge_4.service;
+package org.binar.movie.service;
 
-import org.binar.challenge_4.entities.Movie;
-import org.binar.challenge_4.payload.ApiResponse;
+import org.binar.movie.entities.Movie;
+import org.binar.movie.payload.ApiResponse;
 
 public interface MovieService {
 
@@ -9,6 +9,6 @@ public interface MovieService {
     ApiResponse addMovie(Movie movie);
     ApiResponse updateMovie(Long id);
     ApiResponse deleteMovie(Long id);
-
+    ApiResponse findMovieById(Long id);
 
 }

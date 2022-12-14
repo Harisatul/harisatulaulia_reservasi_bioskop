@@ -1,4 +1,4 @@
-package org.binar.challenge_4.filter;
+package org.binar.movie.filter;
 
 
 import com.auth0.jwt.JWT;
@@ -7,7 +7,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.binar.challenge_4.exception.ExceptionResponse;
+import org.binar.movie.exception.ExceptionResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;

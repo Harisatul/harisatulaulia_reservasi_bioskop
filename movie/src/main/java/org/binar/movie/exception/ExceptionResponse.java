@@ -1,4 +1,4 @@
-package org.binar.challenge_4.exception;
+package org.binar.movie.exception;
 
 import lombok.Data;
 

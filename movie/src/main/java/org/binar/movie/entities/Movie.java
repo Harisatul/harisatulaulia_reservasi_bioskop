@@ -1,16 +1,15 @@
-package org.binar.challenge_4.entities;
+package org.binar.movie.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import java.util.Set;
 
 @Data
 @Entity
-public class Movie extends BaseEntity{
+public class Movie extends BaseEntity {
 
 
     private String movieTittle;
@@ -21,8 +20,8 @@ public class Movie extends BaseEntity{
     @ManyToMany(mappedBy = "moviesGenre")
     private Set<Genre> movies ;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "movies")
-    private List<Schedule> schedules = new ArrayList<>();
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "movies")
+//    private List<Schedule> schedules = new ArrayList<>();
 
 }

@@ -1,4 +1,4 @@
-package org.binar.challenge_4.entities;
+package org.binar.user.entities;
 
 import lombok.Data;
 
@@ -9,11 +9,10 @@ import java.util.List;
 
 @Entity
 @Data
-public class Role extends BaseEntity{
+public class Role extends BaseEntity {
 
     private String name;
 
     @ManyToMany(mappedBy = "roles")
     private List<Users> users = new LinkedList<>();
-
 }

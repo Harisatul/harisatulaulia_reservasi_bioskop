@@ -1,14 +1,10 @@
-package org.binar.challenge_4.service.impl;
+package org.binar.movie.service;
 
-import org.assertj.core.api.AssertionsForClassTypes;
-import org.binar.challenge_4.entities.Movie;
-import org.binar.challenge_4.entities.Users;
-import org.binar.challenge_4.repository.MovieRepository;
-import org.binar.challenge_4.service.MovieService;
+import org.binar.movie.entities.Movie;
+import org.binar.movie.repository.MovieRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
@@ -18,15 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.AssertionsForClassTypes.*;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.BDDMockito.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 class MovieServiceImplTest {
 
-    @Mock private MovieRepository movieRepository;
+    @Mock
+    private MovieRepository movieRepository;
 
     private MovieService movieService;
 

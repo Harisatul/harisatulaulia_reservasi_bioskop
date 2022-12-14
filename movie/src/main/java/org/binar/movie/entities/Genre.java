@@ -1,4 +1,5 @@
-package org.binar.challenge_4.entities;
+package org.binar.movie.entities;
+
 
 import lombok.Data;
 

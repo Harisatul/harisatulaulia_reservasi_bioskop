@@ -1,6 +1,6 @@
-package org.binar.challenge_4.repository;
+package org.binar.movie.repository;
 
-import org.binar.challenge_4.entities.Movie;
+import org.binar.movie.entities.Movie;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

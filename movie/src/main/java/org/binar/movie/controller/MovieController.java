@@ -1,15 +1,13 @@
-package org.binar.challenge_4.controller;
+package org.binar.movie.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.servers.Server;
-import org.binar.challenge_4.entities.Movie;
-import org.binar.challenge_4.entities.Users;
-import org.binar.challenge_4.exception.ExceptionResponse;
-import org.binar.challenge_4.payload.ApiResponse;
-import org.binar.challenge_4.service.MovieService;
+import org.binar.movie.entities.Movie;
+import org.binar.movie.exception.ExceptionResponse;
+import org.binar.movie.payload.ApiResponse;
+import org.binar.movie.service.MovieService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("cinema/api/v1/movies")
 public class MovieController {
 
-    private  MovieService movieService;
+    private MovieService movieService;
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
     }
@@ -32,7 +30,7 @@ public class MovieController {
             description = "to fetch all movie data",
             responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
                     content = @Content(
-                                schema = @Schema(implementation = ApiResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE),
+                            schema = @Schema(implementation = ApiResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE),
                     description = "Success Response."),
                     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400",
                             content = @Content(schema = @Schema(implementation = ExceptionResponse.class),
@@ -136,4 +134,11 @@ public class MovieController {
         ApiResponse apiResponse = movieService.deleteMovie(id);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
+
+    @GetMapping("/getmovie/{movieId}")
+    public ResponseEntity<ApiResponse> findMovieById(@PathVariable(value = "movieId") Long id){
+        ApiResponse apiResponse = movieService.findMovieById(id);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
 }

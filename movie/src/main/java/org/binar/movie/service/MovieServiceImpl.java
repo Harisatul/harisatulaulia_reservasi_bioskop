@@ -1,21 +1,18 @@
-package org.binar.challenge_4.service.impl;
+package org.binar.movie.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.binar.challenge_4.entities.Movie;
-import org.binar.challenge_4.entities.Schedule;
-import org.binar.challenge_4.payload.ApiResponse;
-import org.binar.challenge_4.repository.MovieRepository;
-import org.binar.challenge_4.repository.ScheduleRepository;
-import org.binar.challenge_4.service.MovieService;
+import org.binar.movie.entities.Movie;
+import org.binar.movie.payload.ApiResponse;
+import org.binar.movie.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 @Slf4j
 public class MovieServiceImpl implements MovieService {
+
 
     private MovieRepository movieRepository;
 
@@ -53,5 +50,12 @@ public class MovieServiceImpl implements MovieService {
         return new ApiResponse(Boolean.TRUE, "successfully deleted movie with id " + id);
     }
 
+    @Override
+    public ApiResponse findMovieById(Long id) {
+        Movie movie = movieRepository.findById(id).orElseThrow();
+        return new ApiResponse(Boolean.TRUE, "success", movie);
+    }
+
 
 }
+

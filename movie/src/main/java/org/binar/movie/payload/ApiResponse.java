@@ -1,4 +1,4 @@
-package org.binar.challenge_4.payload;
+package org.binar.movie.payload;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -47,4 +47,5 @@ public class ApiResponse implements Serializable {
         this.message = message;
         this.httpStatus = httpStatus;
     }
+
 }
